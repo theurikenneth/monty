@@ -52,7 +52,7 @@ void openfile(char *namefile)
     }
   else
     {
-      gloabl.file = file;
+      global.file = file;
       while ((getline(&buff, &buff_long, file)) != -1)
 	{
 	  line_number++;
