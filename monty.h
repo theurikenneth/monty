@@ -42,51 +42,58 @@ typedef struct instruction_s
   void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct global_s - opcode and its function
- * @num: the opcode
- * @headstack: function to handle the opcode
- * @line_number: ech line.
- * @file: file.
- * @gbuff: buff.
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
- */
-typedef struct global_s
-{
-  char *num;
-  char *gbuff;
-  stack_t **headstack;
-  unsigned int line_number;
-  FILE *file;
-} global_t;
+void _push(stack_t **stack, unsigned int line_number, char *str, int *mode);
 
-extern global_t global;
+char *check_push_arg(char *token, unsigned int line_number);
 
-typedef void (*instruct_func)(stack_t **stack, unsigned int line_number);
-int main(int argc, char **argv);
-void error_fun(stack_t **headstack);
-void free_list(stack_t *head);
-void get_func(char *op);
-void openfile(char *namefile);
-void _pall(stack_t **stack, unsigned int line_number);
-void _swap(stack_t **stack, unsigned int line_number);
-void _nop(stack_t **stack, unsigned int line_number);
-void _pchar(stack_t **stack, unsigned int line_number);
-void _pint(stack_t **stack, unsigned int line_number);
-void _push(stack_t **stack, unsigned int line_number);
-stack_t *add_dnodeint(stack_t **head, const int n);
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-int delete_node_index(stack_t **head, unsigned int index);
-void free_stack_t(stack_t **head);
-int _isnumber(char *s);
-void _pall(stack_t **stack, unsigned int line_number);
-void _pint(stack_t **stack, unsigned int line_number);
-void _pop(stack_t **stack, unsigned int line_number);
-void _add(stack_t **stack, unsigned int line_number);
-void _sub(stack_t **stack, unsigned int line_number);
-void _mul(stack_t **stack, unsigned int line_number);
-void _div(stack_t **stack, unsigned int line_number);
-void exit_op(void);
+void treat_line(stack_t **head, FILE *fp, char *line,
+		unsigned int line_number, int *mode);
+
+void treat_token(stack_t **head, FILE *fp, char *line,
+		 char *token, unsigned int line_number, int *mode);
+
+void (*get_function(char *token))(stack_t **, unsigned int);
+
+void get_invalid_opcode(char *token, unsigned int line_number);
+
+int is_number(char *str, unsigned int line_number);
+
+void get_usage_err(unsigned int line_number);
+
+void _pall(stack_t **head, unsigned int line_number);
+
+void _pint(stack_t **head, unsigned int line_number);
+
+void _pop(stack_t **head, unsigned int line_number);
+
+void _swap(stack_t **head, unsigned int line_number);
+
+void _add(stack_t **head, unsigned int line_number);
+
+void _nop(stack_t **head, unsigned int line_number);
+
+void _sub(stack_t **head, unsigned int line_number);
+
+void _div(stack_t **head, unsigned int line_number);
+
+void _mul(stack_t **head, unsigned int line_number);
+
+void _mod(stack_t **head, unsigned int line_number);
+
+void _pchar(stack_t **head, unsigned int line_number);
+
+void _pstr(stack_t **head, unsigned int line_number);
+
+void _rotl(stack_t **head, unsigned int line_number);
+
+void _rotr(stack_t **head, unsigned int line_number);
+
+void free_list(stack_t **head, FILE *fp, char *line);
+
+int check_mode(char *token, int *mode);
+
+void stack_push(stack_t **head, stack_t **new);
+
+void enqueue(stack_t **head, stack_t **new);
 
 #endif /* MONTY_H */
