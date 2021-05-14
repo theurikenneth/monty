@@ -28,7 +28,7 @@ void _rotl(stack_t **head, unsigned int line_number)
   if (new == NULL)
     {
       dprintf(STDERR_FILENO, "Error: malloc failed\n");
-      error = 1;
+ 
       return;
     }
   new->n = n;

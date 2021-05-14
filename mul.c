@@ -17,7 +17,7 @@ void _mul(stack_t **head, unsigned int line_number)
 	      "L%d: can't mul, stack too short\n",
 	      line_number
 	      );
-      error = 1;
+
       return;
     }
 

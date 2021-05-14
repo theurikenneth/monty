@@ -20,7 +20,7 @@ void _push(stack_t **head, unsigned int line_number, char *arg, int *mode)
   if (new == NULL)
     {
       dprintf(STDERR_FILENO, "Error: malloc failed\n");
-      error = 1;
+
       return;
     }
   new->n = num;
@@ -87,7 +87,7 @@ void get_usage_err(unsigned int line_number)
 	  STDERR_FILENO,
 	  "L%d: usage: push integer\n",
 	  line_number);
-  error = 1;
+
 }
 
 /**

@@ -24,7 +24,7 @@ void treat_token(stack_t **head, FILE *fp, char *line,
       if (push_arg != 0)
 	{
 	  _push(head, line_number, push_arg, mode);
-	  if (error == 1)
+
 	    {
 	      free_list(head, fp, line);
 	      exit(EXIT_FAILURE);
@@ -41,15 +41,14 @@ void treat_token(stack_t **head, FILE *fp, char *line,
   if (!f)
     {
       get_invalid_opcode(token, line_number);
-      if (error == 1)
+
 	{
 	  free_list(head, fp, line);
 	  exit(EXIT_FAILURE);
 	}
     }
   f(head, line_number);
-  if (error == 1)
-    {
+   {
       free_list(head, fp, line);
       exit(EXIT_FAILURE);
     }
@@ -117,7 +116,6 @@ void get_invalid_opcode(char *token, unsigned int line_number)
   if (!invalid_opcode)
     {
       dprintf(STDERR_FILENO, "Error: malloc failed\n");
-      error = 1;
       return;
     }
   for (i = 0; i < len; i++)
@@ -126,5 +124,5 @@ void get_invalid_opcode(char *token, unsigned int line_number)
 	  "L%d: unknown instruction %s\n",
 	  line_number, invalid_opcode);
   free(invalid_opcode);
-  error = 1;
+
 }

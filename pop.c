@@ -17,7 +17,6 @@ void _pop(stack_t **head, unsigned int line_number)
 	      "L%d: can't pop an empty stack\n",
 	      line_number
 	      );
-      error = 1;
       return;
     }
 
