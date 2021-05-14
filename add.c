@@ -1,4 +1,3 @@
-
 #include "monty.h"
 
 /**
@@ -18,6 +17,7 @@ void _add(stack_t **head, unsigned int line_number)
 	      "L%d: can't add, stack too short\n",
 	      line_number
 	      );
+    return;
     }
 
   sum = ((*head)->n) + (((*head)->next)->n);
