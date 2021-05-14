@@ -1,40 +1,41 @@
 #include "monty.h"
-global_t global;
 
-/* /\** */
-/*  * global_var - handle function for monty languege */
-/*  * @void: num of inputs int */
-/*  * Return: None */
-/*  *\/ */
-/* void global_var(void) */
-/* { */
-/*  global.num = NULL; */
-/*  global.headstack = NULL; */
-/*  global.line_number = 0; */
-/*     global.linecount = 1; */
-/*  global.gbuff = NULL; */
-
-/* } */
+int error = 0;
 
 /**
- * main - handle function for monty languege
- * @argc: num of inputs int
- * @argv: code files char
- * Return: None
+ * main - the main function.
+ * @ac: arguments number.
+ * @av: arguments vector.
+ * Return: int.
  */
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-  stack_t *headstack = NULL;
+  FILE *fp;
+  char *line = NULL;
+  size_t size = 0;
+  ssize_t len;
+  stack_t *head = NULL;
+  int line_number = 0;
+  int mode = 0;
 
-  global.headstack = &headstack;
-
-  if (argc != 2)
+  if (ac != 2)
     {
-      fprintf(stderr, "USAGE: monty file\n");
-      error_fun(&headstack);
+      dprintf(STDERR_FILENO, "USAGE: monty file\n");
       exit(EXIT_FAILURE);
     }
 
-  openfile(argv[1]);
-  return (0);
+  fp = fopen(av[1], "r");
+  if (fp == NULL)
+    {
+      dprintf(STDERR_FILENO, "Error: Can't open file %s\n", av[1]);
+      exit(EXIT_FAILURE);
+    }
+
+  while ((len = getline(&line, &size, fp)) != -1)
+    {
+      line_number++;
+      treat_line(&head, fp, line, line_number, &mode);
+    }
+  free_list(&head, fp, line);
+  exit(EXIT_SUCCESS);
 }
