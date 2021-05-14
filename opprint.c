@@ -8,13 +8,13 @@
  */
 void pall(stack_t **top)
 {
-  stack_t *ptr = *top;
+stack_t *ptr = *top;
 
-  while (ptr != NULL)
-    {
-      printf("%d\n", ptr->n);
-      ptr = ptr->prev;
-    }
+while (ptr != NULL)
+{
+printf("%d\n", ptr->n);
+ptr = ptr->prev;
+}
 }
 
 /**
@@ -24,9 +24,9 @@ void pall(stack_t **top)
  */
 void pint(stack_t **top)
 {
-  if (*top == NULL)
-    exitwrap(EXIT_FAILURE, "can't pint, stack empty", *top);
-  printf("%d\n", (*top)->n);
+if (*top == NULL)
+exitwrap(EXIT_FAILURE, "can't pint, stack empty", *top);
+printf("%d\n", (*top)->n);
 }
 
 /**
@@ -36,13 +36,13 @@ void pint(stack_t **top)
  */
 void pchar(stack_t **top)
 {
-  stack_t *ptr = *top;
+stack_t *ptr = *top;
 
-  if (ptr == NULL)
-    exitwrap(EXIT_FAILURE, "can't pchar, stack empty", *top);
-  if (ptr->n > 127 || ptr->n < 0)
-    exitwrap(EXIT_FAILURE, "can't pchar, value out of range", *top);
-  printf("%c\n", ptr->n);
+if (ptr == NULL)
+exitwrap(EXIT_FAILURE, "can't pchar, stack empty", *top);
+if (ptr->n > 127 || ptr->n < 0)
+exitwrap(EXIT_FAILURE, "can't pchar, value out of range", *top);
+printf("%c\n", ptr->n);
 }
 
 /**
@@ -53,12 +53,12 @@ void pchar(stack_t **top)
  */
 void pstr(stack_t **top)
 {
-  stack_t *ptr = *top;
+stack_t *ptr = *top;
 
-  while (ptr != NULL && ptr->n <= 127 && ptr->n > 0)
-    {
-      printf("%c", ptr->n);
-      ptr = ptr->prev;
-    }
-  printf("\n");
+while (ptr != NULL && ptr->n <= 127 && ptr->n > 0)
+{
+printf("%c", ptr->n);
+ptr = ptr->prev;
+}
+printf("\n");
 }
